@@ -1,0 +1,84 @@
+<html>
+<head>
+	<meta charset="utf-8">
+  	<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+  	<title>Карта Сампло</title>
+    <link rel="stylesheet" href="https://js.arcgis.com/4.0/esri/css/main.css">
+    <script src="https://js.arcgis.com/4.0/"></script>
+
+  	<style>
+    	html,
+    	body,
+    	#viewDiv {
+      	padding: 0;
+      	margin: 0;
+      	height: 100%;
+      	width: 100%;
+    	}
+  	</style>
+
+	<script>
+ 		require([
+			"esri/Map",
+     		"esri/views/MapView",
+      		"esri/Graphic",
+      		"esri/geometry/Polygon",
+      		"esri/symbols/SimpleFillSymbol",
+      		"dojo/domReady!"
+		], function(Map, MapView, Graphic, Polygon, SimpleFillSymbol){
+  			var map = new Map({
+        		basemap: "topo"
+      		});
+
+      		var view = new MapView({
+        		center: [50.102645, 53.197957],
+        		container: "viewDiv",
+        		map: map,
+        		zoom: 18
+      		});
+
+      		var polygon1 = new Polygon({
+        		rings: [
+          		[50.10234036, 53.19803959],
+          		[50.10254516, 53.19832684],
+          		[50.10286411, 53.19825221],
+          		[50.10265026, 53.19795853],
+          		[50.10234036, 53.19803959]
+        		]
+      		});
+            var polygon2 = new Polygon({
+        		rings: [
+          		[50.10264026, 53.19793853],
+          		[50.10272277, 53.19805364],
+          		[50.10326253, 53.1979301],
+          		[50.10338323, 53.19809635],
+          		[50.10361872, 53.19804576],
+          		[50.1034056, 53.19774896],
+          		[50.10264026, 53.19793853],
+        		]
+      		});
+
+      		var fillSymbol = new SimpleFillSymbol({
+        		color: [227, 139, 79, 0.8],
+        		outline: {
+          		color: [255, 255, 255],
+          		width: 1
+        		}
+      		});
+
+	      	var polygon1Graphic = new Graphic({
+	        	geometry: polygon1,
+	        	symbol: fillSymbol
+	      	});
+	      	var polygon2Graphic = new Graphic({
+	        	geometry: polygon2,
+	        	symbol: fillSymbol
+	      	});
+	      	view.graphics.addMany([polygon1Graphic, polygon2Graphic]);
+   		});
+	</script>
+</head>
+<body>
+	<div id="viewDiv"></div>
+</body>
+</html>
